@@ -23,7 +23,19 @@ app.get('/', (req, res) => {
 });
 
 app.post('/applied', (req, res) => {
-    console.log(req.ip);
+    requestzilla.send({embed: {
+        color: 0xCBFDFC,
+        fields: [
+            {
+                name: 'Name:',
+                value: req.body.lol
+            }
+        ],
+        footer: {
+            text: 'IP address: ' + req.ip
+        }
+    }});
+    res.redirect('/');
 });
 
 //Google and YTDL-Core
@@ -43,6 +55,7 @@ var reactEmoji = require('./Messages/msghandle.js').reactEmoji;
 var logzilla;
 var musiczilla;
 var populationchannel;
+var requestzilla;
 
 bot.on('ready', () => {
     console.log('I am ready to be OP!');
@@ -53,6 +66,8 @@ bot.on('ready', () => {
 
     populationchannel = bot.channels.get('484967681871577088');
     populationchannel.setName('Members count: ' + bot.guilds.get('390547531634966530').memberCount);
+
+    requestzilla = bot.channels.get('388244076685688834');
 });
 
 bot.on('guildMemberAdd', (member) => {
