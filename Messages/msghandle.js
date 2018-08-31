@@ -46,7 +46,7 @@ const zbgcocstarnew = '';
 
 //Discord Message Functions
 
-exports.responseMessage = function(message) {
+exports.responseMessage = function(message, bot) {
     if(message.content.startsWith('Z!')) {
         var command = message.content.slice(2, message.content.length);
        
@@ -56,6 +56,38 @@ exports.responseMessage = function(message) {
                     text: cc.list[i].value
                 };
                 break;
+            }
+        }
+
+        if(command.startsWith('enlarge')) {
+            var toEnlarge = command.slice(8, command.length);
+            console.log(toEnlarge);
+            if(toEnlarge.startsWith('<@')) {
+                //User-avatar-url
+                var userid = toEnlarge.slice(toEnlarge.length - 19, toEnlarge.length - 1);
+                var enlargeuser = bot.users.get(userid);
+                return {
+                    text: enlargeuser.avatarURL
+                }
+            }
+            else if(toEnlarge.startsWith('<:')) {
+                //Non-animated emote
+                var emojiid = toEnlarge.slice(toEnlarge.length - 19, toEnlarge.length - 1);
+                return {
+                    text: `https://cdn.discordapp.com/emojis/${emojiid}.png`
+                }
+            }
+            else if(toEnlarge.startsWith('<a:')) {
+                //Animated-emote
+                var aemojiid = toEnlarge.slice(toEnlarge.length - 19, toEnlarge.length - 1);
+                return {
+                    text: `https://cdn.discordapp.com/emojis/${aemojiid}.gif`
+                }
+            }
+            else {
+                return {
+                    text: 'I dont know how to enlarge ' + toEnlarge + ' fam.'
+                };
             }
         }
 

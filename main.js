@@ -42,6 +42,7 @@ var reactEmoji = require('./Messages/msghandle.js').reactEmoji;
 
 var logzilla;
 var musiczilla;
+var populationchannel;
 
 bot.on('ready', () => {
     console.log('I am ready to be OP!');
@@ -49,10 +50,21 @@ bot.on('ready', () => {
     logzilla = bot.channels.get('409928557469630464');
     musiczilla = bot.channels.get('392990490317946882');
     musiczilla.leave();
+
+    populationchannel = bot.channels.get('484967681871577088');
+    populationchannel.setName('Members count: ' + bot.guilds.get('390547531634966530').memberCount);
+});
+
+bot.on('guildMemberAdd', (member) => {
+    populationchannel.setName('Members count: ' + bot.guilds.get('390547531634966530').memberCount);
+});
+
+bot.on('guildMemberRemove', (member) => {
+    populationchannel.setName('Members count: ' + bot.guilds.get('390547531634966530').memberCount);
 });
 
 bot.on('message', (message) => {
-    var sentmessage = responseMessage(message);
+    var sentmessage = responseMessage(message, bot);
 
     if(sentmessage.text != 'None') {
         message.channel.send(sentmessage.text);
@@ -113,8 +125,13 @@ bot.on('message', (message) => {
     }
 
     if(message.content == 'Z!stop-playing') {
-        musiczilla.leave();
-        isplaying = false;
+        if(message.author.id == '334911278298562561') {
+            musiczilla.leave();
+            isplaying = false;
+        }
+        else {
+            message.channel.send('You dont have permissions to stop songs!');
+        }
     }
 
     var reactedemoji = reactEmoji(message.content);
