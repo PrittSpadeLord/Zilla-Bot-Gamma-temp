@@ -158,6 +158,8 @@ bot.on('message', (message) => {
 
             musiczilla.join()
             .then(connection => {
+                var stream = ytdl(href, { filter : 'audioonly' });
+                var dispatcher = connection.playStream(stream, streamOptions);
                 message.channel.send({embed: {
                     color: 0xCBFDFC,
                     description: atext,
@@ -165,8 +167,6 @@ bot.on('message', (message) => {
                         url: `https://img.youtube.com/vi/${ytid}/hqdefault.jpg`
                     }
                 }});
-                var stream = ytdl(href, { filter : 'audioonly' });
-                var dispatcher = connection.playStream(stream, streamOptions);
                 isplaying = true;
                 dispatcher.on('end', end => {
                     setTimeout(() => {

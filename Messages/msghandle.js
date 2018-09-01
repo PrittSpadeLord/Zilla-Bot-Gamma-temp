@@ -4,6 +4,9 @@ const MongoClient = require('mongodb').MongoClient;
 var db;
 var cc;
 var reactions;
+var dogs;
+var cats;
+var snakes;
 
 MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-gamma', { useNewUrlParser: true }, (err, client) => {
     if(err) console.log(err);
@@ -18,6 +21,21 @@ MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-ga
     db.collection('reactions').find().toArray((err, results) => {
         if(err) console.log(err);
         reactions = results[0];
+    });
+
+    db.collection('dogs').find().toArray((err, results) => {
+        if(err) console.log(err);
+        dogs = results[0];
+    });
+
+    db.collection('cats').find().toArray((err, results) => {
+        if(err) console.log(err);
+        cats = results[0];
+    });
+
+    db.collection('snakes').find().toArray((err, results) => {
+        if(err) console.log(err);
+        snakes = results[0];
     });
 });
 
@@ -56,6 +74,12 @@ exports.responseMessage = function(message, bot) {
                     text: cc.list[i].value
                 };
                 break;
+            }
+        }
+
+        if(command == 'ping') {
+            return {
+                text: ':ping_pong: Pong! Response time: ' + bot.ping + 'ms'
             }
         }
 
