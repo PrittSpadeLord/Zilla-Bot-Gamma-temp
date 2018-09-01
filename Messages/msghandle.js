@@ -66,8 +66,15 @@ exports.responseMessage = function(message, bot) {
                 //User-avatar-url
                 var userid = toEnlarge.slice(toEnlarge.length - 19, toEnlarge.length - 1);
                 var enlargeuser = bot.users.get(userid);
-                return {
-                    text: enlargeuser.avatarURL
+                if(enlargeuser) {
+                    return {
+                        text: enlargeuser.avatarURL
+                    }
+                }
+                else {
+                    return {
+                        text: 'User not found. Please check the id and retry.'
+                    }
                 }
             }
             else if(toEnlarge.startsWith('<:')) {
