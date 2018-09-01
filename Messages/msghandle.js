@@ -61,7 +61,6 @@ exports.responseMessage = function(message, bot) {
 
         if(command.startsWith('enlarge')) {
             var toEnlarge = command.slice(8, command.length);
-            console.log(toEnlarge);
             if(toEnlarge.startsWith('<@')) {
                 //User-avatar-url
                 var userid = toEnlarge.slice(toEnlarge.length - 19, toEnlarge.length - 1);
@@ -98,6 +97,72 @@ exports.responseMessage = function(message, bot) {
             }
         }
 
+        if(command.startsWith('ban')) {  
+            if(message.member.roles.get('434642446761066506')) {
+                var query = command.slice(4, command.length);
+                var banuserid;
+
+                if(query.length == 18) {
+                    banuserid = query;
+                }
+                else if((query.length == 22) || (query.length == 21)){
+                    banuserid = query.slice(query.length - 19, query.length - 1);
+                }
+
+                var banmember = bot.guilds.get('390547531634966530').members.get(banuserid);
+                var banuser = bot.users.get(banuserid);
+                if(banmember) {
+                    return {
+                        text: '<:zbgban:485297960100429825> ***' + banuser.username + '#' + banuser.discriminator + '*** has been banned.',
+                        usertoban: banmember
+                    }
+                }
+                else {
+                    return {
+                        text: 'Error. Cannot find this user.'
+                    }
+                }
+            }
+            else {
+                return {
+                    text: 'Nice try. You can\'t ban members without having the **Admin** role.'
+                }
+            }
+        }
+
+        if(command.startsWith('kick')) {  
+            if(message.member.roles.get('390792319001034754')) {
+                var query = command.slice(5, command.length);
+                var kickuserid;
+
+                if(query.length == 18) {
+                    kickuserid = query;
+                }
+                else if((query.length == 22) || (query.length == 21)){
+                    kickuserid = query.slice(query.length - 19, query.length - 1);
+                }
+
+                var kickmember = bot.guilds.get('390547531634966530').members.get(kickuserid);
+                var kickuser = bot.users.get(kickuserid);
+                if(kickmember) {
+                    return {
+                        text: '<:zbgban:485297960100429825> ***' + kickuser.username + '#' + kickuser.discriminator + '*** has been kicked.',
+                        usertokick: kickmember
+                    }
+                }
+                else {
+                    return {
+                        text: 'Error. Cannot find this user.'
+                    }
+                }
+            }
+            else {
+                return {
+                    text: 'Nice try. You can\'t kick members without having the **Moderator** role.'
+                }
+            }
+        }
+        
         if(command.startsWith('create-cc')) {
             if(message.author.id == '334911278298562561') {
                 var namevalue = command.slice(10, command.length);
