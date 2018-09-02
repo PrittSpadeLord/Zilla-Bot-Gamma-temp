@@ -1,0 +1,139 @@
+/*
+
+LOGZILLA TEMPLATE:
+
+logzilla.send({embed: {
+    color: 0xCBFDFC(blue) or 0xFDCBCB(red) or 0xCBCBCB(grey),
+    description: '',
+    fields: [
+        {
+            name: '',
+            value: ''
+        }
+    ],
+    thumbnail: {
+        url: ''
+    },
+    image: {
+        url: ''
+    },
+    timestamp: new Date()
+}});
+
+*/
+
+//Member Join
+
+bot.on('guildMemberAdd', (member) => {
+    populationchannel.setName('Members count: ' + zillaguild.memberCount);
+
+    logzilla.send({embed: {
+        color: 0xCBFDFC,
+        description: 'A new member has joined the server',
+        thumbnail: {
+            url: member.user.avatarURL
+        },
+        fields: [
+            {
+                name: member.user.username + '#' + member.user.discriminator,
+                value: member.user.id
+            }
+        ],
+        timestamp: new Date()
+    }});
+});
+
+//Member Leave
+
+bot.on('guildMemberRemove', (member) => {
+    populationchannel.setName('Members count: ' + zillaguild.memberCount);
+
+    logzilla.send({embed: {
+        color: 0xFDCBCB,
+        description: 'A member has left/been kicked from the server',
+        thumbnail: {
+            url: member.user.avatarURL
+        },
+        fields: [
+            {
+                name: member.user.username + '#' + member.user.discriminator,
+                value: member.user.id
+            }
+        ],
+        timestamp: new Date(),
+    }});
+});
+
+//Channel create
+
+bot.on('channelCreate', (channel) => {
+    logzilla.send({embed: {
+        color: 0xCBFDFC,
+        description: 'A channel has been created',
+        fields: [
+            {
+                name: channel.name,
+                value: channel.id
+            }
+        ],
+        timestamp: new Date()
+    }});
+});
+
+//Channel delete
+
+bot.on('channelDelete', (channel) => {
+    logzilla.send({embed: {
+        color: 0xFDCBCB,
+        description: 'A channel has been deleted',
+        fields: [
+            {
+                name: channel.name,
+                value: channel.id
+            }
+        ],
+        timestamp: new Date()
+    }});
+});
+
+//Deleted Message
+
+bot.on('messageDelete', (message) => {
+    logzilla.send({embed: {
+        color: 0xFDCBCB,
+        description: 'A message has been deleted in **' + message.channel.name + '**',
+        fields: [
+            {
+                name: 'Message:',
+                value: message.content
+            }
+        ],
+        timestamp: new Date(),
+        footer: {
+            text: 'ID: ' + message.id
+        }
+    }});
+});
+
+//Edited Message 
+
+bot.on('messageUpdate', (oldMessage, newMessage) => {
+    logzilla.send({embed: {
+        color: 0xCBCBCB,
+        description: 'A message has been edited in **' + oldMessage.channel.name + '**',
+        fields: [
+            {
+                name: 'Before:',
+                value: oldMessage.content
+            },
+            {
+                name: 'After:',
+                value: newMessage.content
+            }
+        ],
+        timestamp: new Date(),
+        footer: {
+            text: 'ID: ' + message.id
+        }
+    }});
+});

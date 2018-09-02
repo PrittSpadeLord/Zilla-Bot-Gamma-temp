@@ -75,19 +75,11 @@ bot.on('ready', () => {
     requestzilla = bot.channels.get('388244076685688834');
 });
 
-//Member Join
-
-bot.on('guildMemberAdd', (member) => {
-    populationchannel.setName('Members count: ' + zillaguild.memberCount);
-});
-
-//Member Leave
-
-bot.on('guildMemberRemove', (member) => {
-    populationchannel.setName('Members count: ' + zillaguild.memberCount);
-});
+//
 
 //Message
+
+//
 
 bot.on('message', (message) => {
     var sentmessage = responseMessage(message, bot);
