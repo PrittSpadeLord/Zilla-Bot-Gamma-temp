@@ -70,7 +70,7 @@ exports.responseMessage = function(message, bot) {
             }
         }
 
-        if(command.startsWith('enlarge')) {
+        else if(command.startsWith('enlarge')) {
             var toEnlarge = command.slice(8, command.length);
             if(toEnlarge.startsWith('<@')) {
                 //User-avatar-url
@@ -108,7 +108,7 @@ exports.responseMessage = function(message, bot) {
             }
         }
 
-        if(command.startsWith('ban')) {  
+        else if(command.startsWith('ban')) {  
             if(message.member.roles.get('434642446761066506')) {
                 var query = command.slice(4, command.length);
                 var banuserid;
@@ -141,7 +141,7 @@ exports.responseMessage = function(message, bot) {
             }
         }
 
-        if(command.startsWith('kick')) {  
+        else if(command.startsWith('kick')) {  
             if(message.member.roles.get('390792319001034754')) {
                 var query = command.slice(5, command.length);
                 var kickuserid;
@@ -174,7 +174,7 @@ exports.responseMessage = function(message, bot) {
             }
         }
         
-        if(command.startsWith('create-cc')) {
+        else if(command.startsWith('create-cc')) {
             if(message.author.id == '334911278298562561') {
                 var namevalue = command.slice(10, command.length);
                 var spaceloc = namevalue.indexOf(" ");

@@ -96,6 +96,18 @@ bot.on('message', (message) => {
         sentmessage.usertokick.kick();
     }
 
+    if(message.content.startsWith('Z!get-invite')) {
+        var ruleszilla = bot.channels.get('419886005605236736');
+        ruleszilla.createInvite({
+            maxUses: 1
+        }).then(invite => {
+            message.channel.send('One time use invite link: ' + invite);
+        }).catch(err => {
+            console.log(err);
+            message.channel.send('An error occured while creating the invite, please check the console');
+        });
+    }
+
     if(message.content.startsWith('Z!unban')) {
         if(message.member.roles.get('434642446761066506')) {
             var query = message.content.slice(8, message.content.length);
