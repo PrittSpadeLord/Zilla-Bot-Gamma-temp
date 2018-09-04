@@ -3,10 +3,12 @@ var http = require('http');
 
 setInterval(() => {
     http.get('http://zillabotgamma.herokuapp.com/');
-    console.log('Pinging app');
+    console.log('Pinging zillabotgamma.herokuapp.com');
 }, 1000*60*10);
 
 const express = require('express');
+var port = process.env.PORT||8080;
+
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -14,21 +16,34 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(8080, () => {
-    console.log('Listening on Port 8080');
+app.listen(port, () => {
+    console.log('Listening on Port ' + port);
 });
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/joinzillafam', (req, res) => {
+    res.sendFile(__dirname + '/joinzillafam.html');
+});
+
 app.post('/applied', (req, res) => {
     requestzilla.send({embed: {
         color: 0xCBFDFC,
+        description: 'A user requests to join Zilla Fam',
         fields: [
             {
-                name: 'Name:',
-                value: req.body.lol
+                name: 'Username:',
+                value: req.body.username
+            },
+            {
+                name: 'ID:',
+                value: req.body.id
+            },
+            {
+                name: 'Description:',
+                value: req.body.description
             }
         ],
         footer: {
@@ -72,7 +87,7 @@ bot.on('ready', () => {
     populationchannel = bot.channels.get('484967681871577088');
     populationchannel.setName('Members count: ' + zillaguild.memberCount);
 
-    requestzilla = bot.channels.get('388244076685688834');
+    requestzilla = bot.channels.get('486592940899303445');
 });
 
 //

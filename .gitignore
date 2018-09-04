@@ -1,6 +1,6 @@
-############
-#GIT-IGNORE#
-############
+##############
+# GIT-IGNORE #
+##############
 
 Confidential/
 node_modules/
