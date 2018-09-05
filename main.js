@@ -32,7 +32,7 @@ app.get('/joinzillafam', (req, res) => {
     res.sendFile(__dirname + '/joinzillafam.html');
 });
 
-app.post('/applied', (req, res) => {
+app.post('/applied', async function(req, res) {
     requestzilla.send({embed: {
         color: 0xCBFDFC,
         description: 'A user requests to join Zilla Fam',

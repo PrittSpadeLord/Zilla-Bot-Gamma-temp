@@ -18,7 +18,7 @@ MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-ga
         cc = results[0];
     });
 
-    db.collection('reactions').find().toArray((err, results) => {
+    db.collection('reactions').find().toArray((err, results) =>  {
         if(err) console.log(err);
         reactions = results[0];
     });
