@@ -4,7 +4,14 @@ html {
 
 @font-face {
     font-family: 'Tribal Dragon';
-    src: url(fonts/tribaldragon.ttf), format('truetype');
+    src: url(fonts/tribaldragon.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tribal Times';
+    src: url(/fonts/tribaltimes.ttf);
     font-weight: normal;
     font-style: normal;
 }
@@ -12,8 +19,10 @@ html {
 .topnav {
     background-color: #333;
     overflow: hidden;
-    width: 100%;
+    width: 99%;
+    height: 7%;
     position: fixed;
+    font-family: 'Tribal Times';
 }
 
 .topnav a {
@@ -35,10 +44,16 @@ html {
     color: black;
 }
 
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
 h1 {
     font-family: 'Tribal Dragon';
     color: rgb(203, 253, 252);
-    font-size: 65px;
+    font-size: 60px;
 }
 
 body {
@@ -47,8 +62,11 @@ body {
 }
 
 p {
-    margin-left: 15%;
-    margin-right: 15%;
+    font-family: 'Tribal Times';
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 25px;
+    white-space: pre-wrap;
 }
 
 .button {

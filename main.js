@@ -11,7 +11,7 @@ var port = process.env.PORT||8080;
 
 const bodyParser = require('body-parser');
 const path = require('path');
-
+ 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,7 +54,11 @@ app.post('/applied', (req, res) => {
             text: 'IP address: ' + req.ip
         }
     }});
-    res.redirect('/');
+    res.redirect('/submitted');
+});
+
+app.get('/submitted', (req, res) => {
+    res.sendFile(__dirname + '/submitted.html');
 });
 
 //Google and YTDL-Core
