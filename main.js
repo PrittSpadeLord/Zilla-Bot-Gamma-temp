@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/aboutzillafam', (req, res) => {
+    res.sendFile(__dirname + '/aboutzillafam.html');
+})
+
 app.get('/joinzillafam', (req, res) => {
     res.sendFile(__dirname + '/joinzillafam.html');
 });

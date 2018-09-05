@@ -43,14 +43,19 @@ h1 {
 
 body {
     background-color: black;
-    color: white;
+    color: rgb(255, 255, 255);
+}
+
+p {
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .button {
     background-color: rgb(14, 250, 250); /* Green */
     border: none;
     color: black;
-    padding: 10px 32px;
+    padding: 8px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
