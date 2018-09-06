@@ -16,10 +16,6 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(port, () => {
-    console.log('Listening on Port ' + port);
-});
-
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -32,7 +28,7 @@ app.get('/joinzillafam', (req, res) => {
     res.sendFile(__dirname + '/joinzillafam.html');
 });
 
-app.post('/applied', async function(req, res) {
+app.post('/applied', (req, res) => {
     requestzilla.send({embed: {
         color: 0xCBFDFC,
         description: 'A user requests to join Zilla Fam',
@@ -59,6 +55,10 @@ app.post('/applied', async function(req, res) {
 
 app.get('/submitted', (req, res) => {
     res.sendFile(__dirname + '/submitted.html');
+});
+
+app.listen(port, () => {
+    console.log('Listening on Port ' + port);
 });
 
 //Google and YTDL-Core

@@ -1,7 +1,3 @@
-html {
-    cursor: url(zbgcursor.png), auto;
-}
-
 @font-face {
     font-family: 'Tribal Dragon';
     src: url(fonts/tribaldragon.ttf);
@@ -69,6 +65,16 @@ p {
     white-space: pre-wrap;
 }
 
+input[type="text"] {
+    font-family: 'Tribal Times';
+    font-size: 25px;
+}
+
+textarea {
+    font-family: 'Tribal Times';
+    font-size: 25px;
+}
+
 .button {
     background-color: rgb(14, 250, 250); /* Green */
     border: none;
@@ -77,5 +83,6 @@ p {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-family: 'Tribal Times';
+    font-size: 20px;
 }

@@ -2,8 +2,8 @@
 
 const MongoClient = require('mongodb').MongoClient;
 var db;
-var cc;
-var reactions;
+var cc = {list: []};
+var reactions = {list: []};
 var dogs;
 var cats;
 var snakes;
@@ -109,7 +109,7 @@ exports.responseMessage = function(message, bot) {
         }
 
         else if(command.startsWith('ban')) {  
-            if(message.member.roles.get('434642446761066506')) {
+            if(message.member.roles.get('390792319001034754') || message.member.roles.get('434642446761066506')) {
                 var query = command.slice(4, command.length);
                 var banuserid;
 
@@ -122,7 +122,12 @@ exports.responseMessage = function(message, bot) {
 
                 var banmember = bot.guilds.get('390547531634966530').members.get(banuserid);
                 var banuser = bot.users.get(banuserid);
-                if(banmember) {
+                if(banmember.roles.get('390792319001034754') || banmember.roles.get('434642446761066506')) {
+                    return {
+                        text: 'I won\'t allow you to ban moderators or admins'
+                    }
+                }
+                else if(banmember) {
                     return {
                         text: '<:zbgban:485297960100429825> ***' + banuser.username + '#' + banuser.discriminator + '*** has been banned.',
                         usertoban: banmember
@@ -155,7 +160,12 @@ exports.responseMessage = function(message, bot) {
 
                 var kickmember = bot.guilds.get('390547531634966530').members.get(kickuserid);
                 var kickuser = bot.users.get(kickuserid);
-                if(kickmember) {
+                if(kickmember.roles.get('390792319001034754') || kickmember.roles.get('434642446761066506')) {
+                    return {
+                        text: 'I won\'t allow you to kick moderators or admins'
+                    }
+                }
+                else if(kickmember) {
                     return {
                         text: '<:zbgban:485297960100429825> ***' + kickuser.username + '#' + kickuser.discriminator + '*** has been kicked.',
                         usertokick: kickmember
