@@ -3,7 +3,6 @@ var http = require('http');
 
 setInterval(() => {
     http.get('http://zillabotgamma.herokuapp.com/');
-    console.log('Pinging zillabotgamma.herokuapp.com');
 }, 1000*60*10);
 
 const express = require('express');

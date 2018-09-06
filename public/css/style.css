@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Tribal Dragon';
-    src: url(fonts/tribaldragon.ttf);
+    src: url(/fonts/tribaldragon.ttf);
     font-weight: normal;
     font-style: normal;
 }
@@ -14,7 +14,6 @@
 
 .topnav {
     background-color: #333;
-    overflow: hidden;
     width: 99%;
     height: 7%;
     position: fixed;
@@ -27,7 +26,7 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .topnav a:hover {
@@ -84,5 +83,5 @@ textarea {
     text-decoration: none;
     display: inline-block;
     font-family: 'Tribal Times';
-    font-size: 20px;
+    font-size: 25px;
 }

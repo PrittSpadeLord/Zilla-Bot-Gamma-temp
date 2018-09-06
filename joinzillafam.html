@@ -9,12 +9,12 @@
     <title>Join Zilla Fam</title>
 </head>
 <body>
+    <script>console.log('%cSup pleb, you lookin for somethin? 🌚', "color: rgb(14, 200, 200); font-size: x-large");</script>
     <div class="topnav">
         <a href="/">Home</a>
         <a href="/aboutzillafam">About Zilla Fam</a>
         <a href="/joinzillafam" class="active">Join Zilla Fam</a>
     </div>
-
     <div align="center">
         <br><br>
         <h1>JOIN&nbsp;&nbsp;ZILLA&nbsp;&nbsp;FAM</h1>
@@ -27,11 +27,16 @@
             <p><input type="text" name="username"></p>
             <p>Your  Discord  18  digit  ID    <font color = "gray">Eg:  459985870458322944</font></p>
             <p><input type="text" name="id"></p>
-            <p>Description  of  why  you  want  to  join  (do  include  if  you  know  any  zillas  from  other  server,  irl  friends,  and  any  other  relevant  detail):</p>
-            <p><textarea name="description" rows="3" cols="99%"></textarea></p>
-            <p><button class="button" type="submit"">Submit</button></p>
+            <p>Description  of  why  you  want  to  join  (do  include  if  you  know  any  zillas  from  other  server,  IRL  friends,  and  any  other  relevant  detail):</p>
+            <p><textarea name="description" rows="3"></textarea></p>
+            <p id="incognito"><button class="button" type="submit"">Submit</button></p>
         </form>
-        <script src="/scripts/checkform.js"></script>
+
+        <script>
+            var incognito = document.getElementById('incognito');
+            var fs = window.webkitRequestFileSystem;
+            fs(window.TEMPORARY, 100, (fs) => {return;}, (fs) => {incognito.innerHTML = '<font color="red">Cannot  submit  application  while  in  Incognito  mode</font>'; console.log('%cI know you\'re in incognito mode', "color: grey; font-size: x-large");}); 
+        </script>
     </p>
 </body>
 </html>
