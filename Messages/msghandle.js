@@ -108,6 +108,50 @@ exports.responseMessage = function(message, bot) {
             }
         }
 
+        else if(command == 'help') {
+            return {
+                text: {embed: {
+                    author: {
+                        icon_url: bot.user.avatarURL,
+                        name: bot.user.username
+                    },
+                    color: 0xCBFDFC,
+                    description: 'Zilla Bot Gamma is the third and the most extensive update, successor to the Zilla Bot Beta. It is loaded with a lot of new features:',
+                    fields: [
+                        {
+                            name: 'Moderation:',
+                            value: 'The bot comes with kick and ban functionality, as well as logging'
+                        },
+                        {
+                            name: 'Music:',
+                            value: 'Zilla bot gamma can play music streaming from Youtube just like many other music bots, but is a little primitive atm as it has no queueing method as yet, but will be added shortly'        
+                        },
+                        {
+                            name: 'COC API:',
+                            value: 'One of the important features of Zilla bot gamma that makes this app stand out from the others is it\'s COC API support, which willl give it the functions of Announcer, Sidekick, and ClashOfStats combined together, making it the perfect COC bot.'
+                        },
+                        {
+                            name: 'Custom commands and reactions:',
+                            value: 'Custom command feature has been update and custom reactions have been introduced.'
+                        },
+                        {
+                            name: 'Website:',
+                            value: 'Zilla bot has it\'s own website, which you can access at http://zillabotgamma.herokuapp.com, which we will be using to expand our reach and recruit more zillas'
+                        },
+                        {
+                            name: 'Misc:',
+                            value: 'Several other misc commands such as Z!enlarge were added'
+                        }
+                    ],
+                    timestamp: new Date(),
+                    footer: {
+                        icon_url: message.author.avatarURL,
+                        text: `Requested by ${message.author.username}#${message.author.discriminator}`
+                    }
+                }}
+            };
+        }
+
         else if(command.startsWith('ban')) {  
             if(message.member.roles.get('390792319001034754') || message.member.roles.get('434642446761066506')) {
                 var query = command.slice(4, command.length);
