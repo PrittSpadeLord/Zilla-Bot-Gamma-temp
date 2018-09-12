@@ -85,16 +85,18 @@ var requestzilla;
 bot.on('ready', () => {
     console.log('I am ready to be OP!');
     bot.user.setActivity('the OPness radiation', {type: 'STREAMING', url: 'https://www.twitch.tv/prittclash'});
-    logzilla = bot.channels.get('409928557469630464');
-    musiczilla = bot.channels.get('392990490317946882');
-    musiczilla.leave();
 
     zillaguild = bot.guilds.get('390547531634966530');
+
+    requestzilla = bot.channels.get('486592940899303445');
 
     populationchannel = bot.channels.get('484967681871577088');
     populationchannel.setName('Members count: ' + zillaguild.memberCount);
 
-    requestzilla = bot.channels.get('486592940899303445');
+    logzilla = bot.channels.get('409928557469630464');
+
+    musiczilla = bot.channels.get('392990490317946882');
+    musiczilla.leave();    
 });
 
 //

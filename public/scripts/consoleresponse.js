@@ -1,0 +1,1 @@
+console.log('%cSup pleb, you lookin for somethin? 🌚', "color: rgb(14, 200, 200); font-size: x-large");

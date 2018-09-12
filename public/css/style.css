@@ -67,11 +67,15 @@ p {
 input[type="text"] {
     font-family: 'Tribal Times';
     font-size: 25px;
+    background-color: rgb(220,254,253);
+    border: 0px solid;
 }
 
 textarea {
     font-family: 'Tribal Times';
     font-size: 25px;
+    background-color: rgb(220,254,253);
+    border: 0px solid;
 }
 
 .button {

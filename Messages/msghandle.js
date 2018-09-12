@@ -8,8 +8,8 @@ var dogs;
 var cats;
 var snakes;
 
-MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-gamma', { useNewUrlParser: true }, (err, client) => {
-    if(err) console.log(err);
+MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-gamma', {useNewUrlParser: true}, (err, client) => {
+    if(err) throw err;
     console.log('Connected to database!');
     db = client.db('zilla-bot-gamma');
 
