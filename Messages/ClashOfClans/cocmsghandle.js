@@ -1,7 +1,7 @@
 //ClashOfClans API
 
 //const clashApi = require('clash-of-clans-api');
-const coctoken = require('./Token/coctoken.json');
+const coctoken = require('../../Confidential/coctoken.json');
 
 //const client = clashApi({
 //    token: coctoken.value

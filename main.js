@@ -69,7 +69,7 @@ const ytdl = require('ytdl-core');
 
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = require('./Confidential/token.json');
+const token = require('./Confidential/discordtoken.json');
 
 var responseMessage = require('./Messages/msghandle.js').responseMessage;
 var reactEmoji = require('./Messages/msghandle.js').reactEmoji;

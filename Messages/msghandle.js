@@ -1,4 +1,5 @@
 //MongoDB
+var database = require('../Confidential/db.json');
 
 const MongoClient = require('mongodb').MongoClient;
 var db;
@@ -8,7 +9,7 @@ var dogs;
 var cats;
 var snakes;
 
-MongoClient.connect('mongodb://userp:passp1@ds020218.mlab.com:20218/zilla-bot-gamma', {useNewUrlParser: true}, (err, client) => {
+MongoClient.connect(database.uri, {useNewUrlParser: true}, (err, client) => {
     if(err) throw err;
     console.log('Connected to database!');
     db = client.db('zilla-bot-gamma');
