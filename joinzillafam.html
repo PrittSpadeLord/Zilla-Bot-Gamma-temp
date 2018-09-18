@@ -26,14 +26,38 @@
     <p>
         Thanks  for  considering  to  join  our  fam!  However,  we  can't  just  let  you  in.  Zilla  Fam  is  a  very  OP  fam  and  we  know  that  OPness  comes  from  quality  and  not  quantity.  We  cannot  stand  normie  plebs  from  entering  our  dank  lands  so  we  need  you  to  prove  your  OP  enough.  How?  Just  fill  the  form  below,  and  if  our  mods  deem  you're  worthy,  you'll  be  DMed  with  the  invitation  to  join  the  fam.
         <form name="applied" action="/applied" method="POST">
-            <p>Your  Discord  username  with  discriminator    <font color = "gray">Eg:  Wumpus#6666</font></p>
-            <p><input type="text" name="username"></p>
-            <p>Your  Discord  18  digit  ID    <font color = "gray">Eg:  459985870458322944</font></p>
-            <p><input type="text" name="id"></p>
+            <p>Your  Discord  username  with  discriminator    <font color = "aqua">Eg:  Wumpus#6666</font></p>
+            <p><input type="text" name="username" id="username"><span id="iderr">&nbsp;HERE</span></p>
+            <p>Your  Discord  18  digit  ID    <font color = "aqua">Eg:  459985870458322944</font></p>
+            <p><input type="text" name="id"><span id="iderr">&nbsp;HERE</span></p>
             <p>Description  of  why  you  want  to  join  (do  include  if  you  know  any  zillas  from  other  server,  IRL  friends,  and  any  other  relevant  detail):</p>
-            <p><textarea name="description" rows="3"></textarea></p>
-            <p id="incognito"><button class="button" type="submit"">Submit</button></p>
+            <p><textarea name="description" rows="3"></textarea><span id="iderr">&nbsp;HERE</span></p>
+            <p id="incognito"><button class="button" type="submit" onsubmit="checkForm()">Submit</button></p>
         </form>
+
+        <script>
+            function checkForm() {
+                var username = document.getElementById('username').value;
+                var discordid = document.getElementById('username').value;
+                var description = document.getElementById('username').value;
+
+                var discriminator = username.slice(username.length - 4, username.length);
+
+                if((username.indexOf('#') != username.length - 5) && (parseInt(discriminator))) {
+                    return false;
+                }
+
+                if((!parseInt(discordid)) && (discordid.length != 18)) {
+                    return false;
+                }
+
+                if(description.length < 25) {
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
 
         <script>
             var incognito = document.getElementById('incognito');

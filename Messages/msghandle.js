@@ -1,14 +1,15 @@
 //MongoDB
-var database = require('../Confidential/db.json');
+var database = require('../Confidential/dburi.json');
 
 const MongoClient = require('mongodb').MongoClient;
 var db;
 var cc = {list: []};
 var reactions = {list: []};
-var dogs;
-var cats;
-var snakes;
+var dogs = {list: []};
+var cats = {list: []};
+var snakes = {list: []};
 
+/*
 MongoClient.connect(database.uri, {useNewUrlParser: true}, (err, client) => {
     if(err) throw err;
     console.log('Connected to database!');
@@ -39,16 +40,13 @@ MongoClient.connect(database.uri, {useNewUrlParser: true}, (err, client) => {
         snakes = results[0];
     });
 });
+*/
 
 //Google
 
 const google = require('google');
 
 const zbgmusic = '<:zbgmusic:484702955568758794>';
-
-//Coc Message Handler declaration
-
-var cocmsghandle = require('./ClashOfClans/cocmsghandle.js').cocmsghandle;
 
 //Discord Message Functions
 
@@ -365,12 +363,6 @@ exports.responseMessage = function(message, bot) {
                 };
             }
         }
-    }
-    else if(message.content.startsWith('Zc!')) {
-        //Zilla Fam Clan commands
-        var command = message.content.slice(3, message.content.length);
-
-        return cocmsghandle(command);
     }
     else {
         //Other random responses

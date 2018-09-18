@@ -65,6 +65,62 @@ app.listen(port, () => {
 const google = require('google');
 const ytdl = require('ytdl-core');
 
+//ClashOfClans API
+
+const clashApi = require('clash-of-clans-api');
+const coctoken = require('./Confidential/coctoken.json');
+
+const client = clashApi({
+    token: coctoken.hp
+});
+
+const zbgsword = '<:zbgsword:491145706527129610>';
+const zbgswordbroken = '<:zbgswordbroken:491149383161741332>';
+const zbgaxe = '<:zbgaxe:491678714736672768>';
+const zbgshield = '<:zbgshield:484296508775071744>';
+const zbgshieldbroken = '<:zbgshieldbroken:484296563418464256>';
+const zbgcocstarempty = '<:zbgcocstarempty:484275771784036354>';
+const zbgcocstarfull = '<:zbgcocstarfull:484275745728888832>';
+const zbgcocstarnew = '<:zbgcocstarnew:485749764701421568>';
+const zbgdonate = '<:zbgdonate:491641211761721364>';
+const zbgreceive = '<:zbgreceive:491641238710386688>';
+
+const zbgcup = '<:zbgcup:491619880152334336>';
+const zbgbuildercup = '<:zbgbuildercup:491619992824184832>';
+
+const th = [
+    'dum',
+    '<:th1:491612093079093249>',
+    '<:th2:491612107008376842>',
+    '<:th3:491612121356828674>',
+    '<:th4:491612135290437634>',
+    '<:th5:491612167892762636>',
+    '<:th6:491612194857812008>',
+    '<:th7:491612225459585024>',
+    '<:th8:491612242249383937>',
+    '<:th9:491612259009953803>',
+    '<:th10:491612277330542613>',
+    '<:th11:491612293411635226>',
+    '<:th12:491612306929876992>'
+];
+
+const bh = [
+    'dum',
+    '<:bh1:491612804881580032>',
+    '<:bh2:491612821621178379>',
+    '<:bh3:491612838453051392>',
+    '<:bh4:491612853518729227>',
+    '<:bh5:491612867762585610>',
+    '<:bh6:491612882522341386>',
+    '<:bh7:491612897924087820>',
+    '<:bh8:491612912004235274>'
+];
+
+function getEmojiLink(emote) {
+    var id = emote.slice(emote.length-19, emote.length-1);
+    return `https://cdn.discordapp.com/emojis/${id}.png`;
+}
+
 //Discord
 
 const Discord = require('discord.js');
@@ -177,7 +233,7 @@ bot.on('message', (message) => {
                 if(res.links[i].href != null) {
                     href = res.links[i].href;
                     ytid = href.slice(32, href.length);
-                    atext = `<:zbgmusic:484702955568758794> Now playing **` + res.links[i].title +`**`;
+                    atext = `<:zbgmusic:491619439230582784> Now playing **` + res.links[i].title +`**`;
                     break;
                 }
             }
@@ -186,7 +242,7 @@ bot.on('message', (message) => {
 
             musiczilla.join()
             .then(connection => {
-                var stream = ytdl(href, { filter : 'audioonly' });
+                var stream = ytdl(href, {filter : 'audioonly'});
                 var dispatcher = connection.playStream(stream, streamOptions);
                 message.channel.send({embed: {
                     color: 0xCBFDFC,
@@ -200,7 +256,7 @@ bot.on('message', (message) => {
                     setTimeout(() => {
                         message.channel.send({embed: {
                             color: 0xCBFDFC,
-                            description: '<:zbgmusic:484702955568758794> Song concluded. Leaving voice channel.'
+                            description: '<:zbgmusic:491619439230582784> Song concluded. Leaving voice channel.'
                         }});
                         musiczilla.leave();
                         isplaying = false;
@@ -224,6 +280,239 @@ bot.on('message', (message) => {
         else {
             message.channel.send('You dont have permissions to stop songs!');
         }
+    }
+
+    if(message.content.startsWith('Zc!')) {
+        var command = message.content.slice(3, message.content.length);
+
+        if(command.startsWith('playerinfo')) {
+            var query = command.slice(11, command.length);
+            if(query.startsWith('#')) {
+                client
+                    .playerByTag(query)
+                    .then(response => {
+                        var maintroopres = '';
+                        var i=0;
+
+                        var buildertroopres = '';
+                        var j=response.troops.length - 1;
+
+                        var spellres = '';
+                        var k=0;
+
+                        var mainherores = '';
+                        var m=0;
+                        
+                        while(response.troops[i].village == 'home') {
+                            maintroopres = maintroopres + `*${response.troops[i].name}:* lvl${response.troops[i].level}\n`;
+                            i++;
+                        }
+
+                        while(response.troops[j].village == 'builderBase') {
+                            buildertroopres = `*${response.troops[j].name}:* lvl${response.troops[j].level}\n` + buildertroopres;
+                            j--;
+                        }
+
+                        while(response.spells[k]) {
+                            spellres = spellres + `*${response.spells[k].name}:* lvl${response.spells[k].level}\n`;
+                            k++;
+                        }
+
+                        while(response.heroes[m]) {
+                            mainherores = mainherores + `*${response.heroes[m].name}:* lvl${response.heroes[m].level}\n`;
+                            m++;
+                        }
+
+                        if(response.league == undefined) {
+                            message.channel.send({embed: {
+                                color: 0xCBFDFC,
+                                author: {
+                                    name: response.name,
+                                    icon_url: 'https://vignette.wikia.nocookie.net/clashofclans/images/c/c0/Unranked_League.png'
+                                },
+                                thumbnail: {
+                                    url: getEmojiLink(th[response.townHallLevel])
+                                },
+                                fields: [
+                                    {
+                                        name: 'Tag:',
+                                        value: response.tag
+                                    },
+                                    {
+                                        name: 'XP:',
+                                        value: response.expLevel
+                                    },
+                                    {
+                                        name: 'Townhall level:',
+                                        value: response.townHallLevel
+                                    },
+                                    {
+                                        name: 'Main base trophies:',
+                                        value: `${zbgcup} ` + response.trophies,
+                                    },
+                                    {
+                                        name: 'Attack Wins:',
+                                        value: `${zbgsword} ` + response.attackWins,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Defense Wins:',
+                                        value: `${zbgshield} ` + response.defenseWins,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troops donated:',
+                                        value: `${zbgdonate} ` + response.donations,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troops received:',
+                                        value: `${zbgreceive} ` + response.donationsReceived,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troop levels:',
+                                        value: maintroopres
+                                    },
+                                    {
+                                        name: 'Spell levels:',
+                                        value: spellres
+                                    },
+                                    {
+                                        name: 'Hero levels:',
+                                        value: mainherores
+                                    }
+                                ]
+                            }});
+                            message.channel.send({embed: {
+                                color: 0xCBFDFC,
+                                thumbnail: {
+                                    url: getEmojiLink(bh[response.builderHallLevel])
+                                },
+                                fields: [
+                                    {
+                                        name: 'Builder hall level:',
+                                        value: response.builderHallLevel
+                                    },
+                                    {
+                                        name: 'Builder base trophies:',
+                                        value: `${zbgbuildercup} ` + response.versusTrophies
+                                    },
+                                    {
+                                        name: 'Versus battle wins:',
+                                        value: `${zbgaxe} ` + response.versusBattleWins
+                                    },
+                                    {
+                                        name: 'Builder Troop levels:',
+                                        value: buildertroopres
+                                    }
+                                ],
+                                timestamp: new Date(),
+                                footer: {
+                                    text: `Requested by ${message.author.username}`,
+                                    icon_url: message.author.avatarURL
+                                }
+                            }});
+                        }
+                        else {
+                            message.channel.send({embed: {
+                                color: 0xCBFDFC,
+                                author: {
+                                    name: response.name,
+                                    icon_url: response.league.iconUrls.medium
+                                },
+                                thumbnail: {
+                                    url: getEmojiLink(th[response.townHallLevel])
+                                },
+                                fields: [
+                                    {
+                                        name: 'Tag:',
+                                        value: response.tag
+                                    },
+                                    {
+                                        name: 'XP:',
+                                        value: response.expLevel
+                                    },
+                                    {
+                                        name: 'Townhall level:',
+                                        value: response.townHallLevel
+                                    },
+                                    {
+                                        name: 'Main base trophies:',
+                                        value: `${zbgcup} ` + response.trophies,
+                                    },
+                                    {
+                                        name: 'Attack Wins:',
+                                        value: `${zbgsword} ` + response.attackWins,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Defense Wins:',
+                                        value: `${zbgshield} ` + response.defenseWins,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troops donated:',
+                                        value: `${zbgdonate} ` + response.donations,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troops received:',
+                                        value: `${zbgreceive} ` + response.donationsReceived,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: 'Troop levels:',
+                                        value: maintroopres
+                                    },
+                                    {
+                                        name: 'Spell levels:',
+                                        value: spellres
+                                    },
+                                    {
+                                        name: 'Hero levels:',
+                                        value: mainherores
+                                    }
+                                ]
+                            }});
+                            message.channel.send({embed: {
+                                color: 0xCBFDFC,
+                                thumbnail: {
+                                    url: getEmojiLink(bh[response.builderHallLevel])
+                                },
+                                fields: [
+                                    {
+                                        name: 'Builder hall level:',
+                                        value: response.builderHallLevel
+                                    },
+                                    {
+                                        name: 'Builder base trophies:',
+                                        value: `${zbgbuildercup} ` + response.versusTrophies
+                                    },
+                                    {
+                                        name: 'Versus battle wins:',
+                                        value: `${zbgaxe} ` + response.versusBattleWins
+                                    },
+                                    {
+                                        name: 'Builder Troop levels:',
+                                        value: buildertroopres
+                                    }
+                                ],
+                                timestamp: new Date(),
+                                footer: {
+                                    text: `Requested by ${message.author.username}`,
+                                    icon_url: message.author.avatarURL
+                                }
+                            }});
+                        }
+                    })
+                    .catch(err => console.log(err));
+            }
+            else {
+                message.channel.send('Please give a proper player ID');
+            }
+        }
+        
     }
 
     var reactedemoji = reactEmoji(message.content);

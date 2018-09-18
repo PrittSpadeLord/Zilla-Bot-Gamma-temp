@@ -49,11 +49,12 @@ h1 {
     font-family: 'Tribal Dragon';
     color: rgb(203, 253, 252);
     font-size: 60px;
+    font-weight:normal;
 }
 
 body {
     background-color: black;
-    color: rgb(255, 255, 255);
+    color: rgb(195, 195, 195);
 }
 
 p {
@@ -61,7 +62,7 @@ p {
     margin-left: 10%;
     margin-right: 10%;
     font-size: 25px;
-    white-space: pre-wrap;
+    word-spacing: 10px;
 }
 
 input[type="text"] {
@@ -69,6 +70,7 @@ input[type="text"] {
     font-size: 25px;
     background-color: rgb(220,254,253);
     border: 0px solid;
+    word-spacing: 10px;
 }
 
 textarea {
@@ -76,6 +78,11 @@ textarea {
     font-size: 25px;
     background-color: rgb(220,254,253);
     border: 0px solid;
+    word-spacing: 10px;
+}
+
+span {
+    color: red;
 }
 
 .button {
